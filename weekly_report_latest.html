@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>客流分析行业周报</title>
+<style>
+  :root {
+    --primary: #1a1a2e;
+    --accent: #0f4c75;
+    --accent2: #1b6ca8;
+    --highlight: #e94560;
+    --bg: #f7f8fc;
+    --card: #ffffff;
+    --text: #2d2d2d;
+    --muted: #6b7280;
+    --border: #e5e7eb;
+    --tag-blue: #dbeafe;
+    --tag-blue-text: #1d4ed8;
+    --tag-green: #d1fae5;
+    --tag-green-text: #065f46;
+    --tag-orange: #ffedd5;
+    --tag-orange-text: #9a3412;
+    --tag-purple: #ede9fe;
+    --tag-purple-text: #5b21b6;
+    --tag-gray: #f3f4f6;
+    --tag-gray-text: #374151;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 14px;
+    line-height: 1.7;
+  }
+  a { color: var(--accent2); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* Header */
+  .header {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    color: white;
+    padding: 36px 48px 32px;
+  }
+  .header-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+    font-size: 12px;
+    opacity: 0.75;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+  .header-meta .dot { width: 4px; height: 4px; border-radius: 50%; background: rgba(255,255,255,0.5); }
+  .header h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.3px; margin-bottom: 6px; }
+  .header .subtitle { font-size: 13px; opacity: 0.7; }
+  .header-tags { display: flex; gap: 8px; margin-top: 16px; flex-wrap: wrap; }
+  .header-tag {
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 20px;
+    padding: 3px 12px;
+    font-size: 12px;
+    color: white;
+  }
+
+  /* Quick summary bar */
+  .summary-bar {
+    background: var(--card);
+    border-bottom: 1px solid var(--border);
+    padding: 16px 48px;
+    display: flex;
+    gap: 0;
+  }
+  .summary-item {
+    flex: 1;
+    padding: 0 20px;
+    border-right: 1px solid var(--border);
+  }
+  .summary-item:first-child { padding-left: 0; }
+  .summary-item:last-child { border-right: none; }
+  .summary-number { font-size: 22px; font-weight: 700; color: var(--accent); }
+  .summary-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 2px; }
+
+  /* Layout */
+  .container { max-width: 1100px; margin: 0 auto; padding: 32px 48px 64px; }
+
+  /* Section */
+  .section { margin-bottom: 40px; }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--border);
+  }
+  .section-icon {
+    width: 32px; height: 32px;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+  .icon-blue { background: var(--tag-blue); }
+  .icon-green { background: var(--tag-green); }
+  .icon-orange { background: var(--tag-orange); }
+  .icon-purple { background: var(--tag-purple); }
+  .icon-gray { background: var(--tag-gray); }
+  .section-title { font-size: 16px; font-weight: 700; color: var(--primary); }
+  .section-count { margin-left: auto; font-size: 12px; color: var(--muted); }
+
+  /* Cards grid */
+  .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
+  .cards.wide { grid-template-columns: 1fr; }
+  .cards.two-col { grid-template-columns: 1fr 1fr; }
+
+  /* Card */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 18px 20px;
+    transition: box-shadow 0.2s;
+    position: relative;
+  }
+  .card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
+  .card-company {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--muted);
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .card-title { font-size: 14px; font-weight: 600; color: var(--primary); margin-bottom: 8px; line-height: 1.4; }
+  .card-body { font-size: 13px; color: var(--text); line-height: 1.65; }
+  .card-footer {
+    margin-top: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .card-source { font-size: 11px; color: var(--muted); }
+  .card-source a { color: var(--accent2); }
+
+  /* Tags */
+  .tag {
+    display: inline-flex; align-items: center;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+  .tag-blue { background: var(--tag-blue); color: var(--tag-blue-text); }
+  .tag-green { background: var(--tag-green); color: var(--tag-green-text); }
+  .tag-orange { background: var(--tag-orange); color: var(--tag-orange-text); }
+  .tag-purple { background: var(--tag-purple); color: var(--tag-purple-text); }
+  .tag-gray { background: var(--tag-gray); color: var(--tag-gray-text); }
+  .tag-red { background: #fee2e2; color: #991b1b; }
+
+  /* Highlight card (top picks) */
+  .highlight-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 40px; }
+  .highlight-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px;
+    border-top: 3px solid var(--accent2);
+  }
+  .highlight-card.red { border-top-color: var(--highlight); }
+  .highlight-card.green { border-top-color: #059669; }
+  .highlight-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--muted); margin-bottom: 6px; }
+  .highlight-text { font-size: 13px; color: var(--primary); font-weight: 500; line-height: 1.5; }
+
+  /* Global section (simplified) */
+  .global-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .global-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 18px;
+  }
+  .global-region { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 4px; }
+  .global-headline { font-size: 13px; font-weight: 600; color: var(--primary); margin-bottom: 6px; }
+  .global-body { font-size: 12px; color: var(--muted); line-height: 1.6; }
+
+  /* Compliance (minimal) */
+  .compliance-bar {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-left: 4px solid #7c3aed;
+    border-radius: 6px;
+    padding: 14px 18px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .compliance-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+  .compliance-text { font-size: 13px; color: var(--text); line-height: 1.6; }
+  .compliance-text strong { color: var(--primary); }
+
+  /* Next week */
+  .nextweek {
+    background: linear-gradient(135deg, #f0f7ff 0%, #e8f4fd 100%);
+    border: 1px solid #bfdbfe;
+    border-radius: 10px;
+    padding: 20px 24px;
+  }
+  .nextweek-title { font-size: 13px; font-weight: 700; color: var(--accent); margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .nextweek ul { padding-left: 18px; }
+  .nextweek li { font-size: 13px; color: var(--text); line-height: 1.8; }
+
+  /* Footer */
+  .footer {
+    background: var(--primary);
+    color: rgba(255,255,255,0.5);
+    padding: 24px 48px;
+    font-size: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer a { color: rgba(255,255,255,0.6); }
+
+  /* Competitor pill */
+  .competitor-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+    background: var(--highlight);
+    margin-right: 4px;
+  }
+
+  @media (max-width: 768px) {
+    .header { padding: 24px 20px; }
+    .summary-bar { padding: 16px 20px; flex-wrap: wrap; }
+    .container { padding: 20px; }
+    .highlight-cards { grid-template-columns: 1fr; }
+    .global-grid { grid-template-columns: 1fr; }
+    .cards.two-col { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-meta">
+    <span>Milesight 内部</span>
+    <span class="dot"></span>
+    <span>客流分析行业周报</span>
+    <span class="dot"></span>
+    <span>仅供内部参考</span>
+  </div>
+  <h1>客流分析行业周报 · 第 1 期</h1>
+  <div class="subtitle">覆盖周期：2026年6月2日 — 2026年6月8日</div>
+  <div class="header-tags">
+    <span class="header-tag">竞品动态</span>
+    <span class="header-tag">欧洲市场</span>
+    <span class="header-tag">技术趋势</span>
+    <span class="header-tag">合规简报</span>
+    <span class="header-tag">全球视野</span>
+  </div>
+</div>
+
+<!-- STATS BAR -->
+<div class="summary-bar">
+  <div class="summary-item">
+    <div class="summary-number">10</div>
+    <div class="summary-label">监控竞品</div>
+  </div>
+  <div class="summary-item">
+    <div class="summary-number" id="stat-items">—</div>
+    <div class="summary-label">本期条目</div>
+  </div>
+  <div class="summary-item">
+    <div class="summary-number">3</div>
+    <div class="summary-label">重点关注</div>
+  </div>
+  <div class="summary-item">
+    <div class="summary-number">欧洲</div>
+    <div class="summary-label">主要区域</div>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- TOP 3 HIGHLIGHTS -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon icon-orange">⚡</div>
+      <span class="section-title">本周速览 · 最值得关注的 3 件事</span>
+    </div>
+    <div class="highlight-cards" id="highlights">
+      <!-- filled by JS or static -->
+    </div>
+  </div>
+
+  <!-- COMPETITOR NEWS -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon icon-blue">🏢</div>
+      <span class="section-title">竞品动态</span>
+      <span class="section-count" id="count-competitor"></span>
+    </div>
+    <div class="cards" id="cards-competitor"></div>
+  </div>
+
+  <!-- EUROPE MARKET -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon icon-green">📊</div>
+      <span class="section-title">欧洲市场动态</span>
+      <span class="section-count" id="count-market"></span>
+    </div>
+    <div class="cards two-col" id="cards-market"></div>
+  </div>
+
+  <!-- TECH TRENDS -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon icon-purple">🔬</div>
+      <span class="section-title">技术与产品趋势</span>
+      <span class="section-count" id="count-tech"></span>
+    </div>
+    <div class="cards" id="cards-tech"></div>
+  </div>
+
+  <!-- COMPLIANCE (minimal) -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon icon-gray">⚖️</div>
+      <span class="section-title">合规简报</span>
+    </div>
+    <div id="compliance-content"></div>
+  </div>
+
+  <!-- GLOBAL VIEW -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon icon-gray">🌐</div>
+      <span class="section-title">全球视野（非欧洲）</span>
+    </div>
+    <div class="global-grid" id="global-grid"></div>
+  </div>
+
+  <!-- NEXT WEEK -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon icon-blue">📌</div>
+      <span class="section-title">下周关注点</span>
+    </div>
+    <div class="nextweek" id="nextweek"></div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <span>Milesight 客流分析产品团队 · 内部资料请勿外传</span>
+  <span>由 Kiro AI 自动整理 · <a href="#">查看往期周报</a></span>
+</div>
+
+<script>
+// ============================================================
+// DATA — 每期替换此处内容即可
+// ============================================================
+const data = {
+  "highlights": [
+    {
+      "label": "市场数据",
+      "text": "BRC-Sensormatic：英国5月客流同比-2.6%，较4月-10.7%大幅收窄，但创纪录高温令月末客流急剧下滑（来源：BRC/Sensormatic，2026年6月5日）",
+      "type": "blue"
+    },
+    {
+      "label": "合规预警",
+      "text": "欧盟AI Act《数字综合法案》5月7日达成协议：生物特征识别等高风险AI合规截止日期延至2027年12月2日，为客流AI系统争取约16个月缓冲期",
+      "type": "red"
+    },
+    {
+      "label": "竞品动态",
+      "text": "Sensormatic在RTS 2026发布FLEX店前智能平台+Orbit AI Re-ID技术；Xovis PF-Series Edge AI传感器加速商用，单台覆盖面积提升4倍",
+      "type": "green"
+    }
+  ],
+  "competitors": [
+    {
+      "company": "Sensormatic / ShopperTrak",
+      "tag": "新产品",
+      "tagType": "tag-blue",
+      "title": "RTS 2026发布FLEX店前平台+Orbit AI Re-ID技术",
+      "body": "Sensormatic在英国零售技术展（4月22-23日）发布FLEX模块化店前系统，整合数字广告屏与防损标签，同步展示Orbit AI头顶式计数器配套Re-ID技术，可追踪购物者完整路径、停留时间和购买转化，无需采集人脸数据，今年为Sensormatic创立60周年。",
+      "source": "Sensormatic官网新闻稿",
+      "sourceUrl": "https://www.sensormatic.com/en_uk/Resources/pr/2026/RTS-2026-Innovations-Press-Release"
+    },
+    {
+      "company": "Xovis",
+      "tag": "新产品",
+      "tagType": "tag-blue",
+      "title": "PF-Series Edge AI传感器商用推进，单台覆盖面积提升4倍",
+      "body": "Xovis PF-Series搭载Synaptics Astra SL1680 SoC实现边缘端AI推理，单台覆盖面积约为旧款4倍，可减少约60%安装点位，主打机场、交通枢纽和大型零售场所，IT-Trans 2026同期展示交通场景应用。",
+      "source": "Xovis官网Insights",
+      "sourceUrl": "https://www.xovis.com/insights/detail/what-the-pf-series-means-for-people-flow-management"
+    },
+    {
+      "company": "FootfallCam",
+      "tag": "新产品",
+      "tagType": "tag-blue",
+      "title": "发布Centroid 48™ AI引擎，单台处理48路摄像头流",
+      "body": "FootfallCam推出Centroid 48™，单台设备可处理48路摄像头数据流，将现有CCTV摄像头升级为结构化行为数据来源，支持全卖场分区可见性和行为模拟（基于历史数据推演布局变更效果），并提供SaaS按需订阅模式。",
+      "source": "FootfallCam官网博客",
+      "sourceUrl": "https://footfallcam.com/BlogPost/Post/workshop-turning-existing-cctv-into-a-real-time-store-intelligence-platform"
+    },
+    {
+      "company": "RetailNext",
+      "tag": "融资",
+      "tagType": "tag-purple",
+      "title": "[背景情报] Battery Ventures完成战略多数股权投资，加速AI第三阶段",
+      "body": "RetailNext于2025年1月完成Battery Ventures战略性多数股权投资，目前已盈利，每月新增安装超1,200家门店，覆盖100+国家560+零售商，CEO表示将利用专有门店数据集推进AI能力并寻求收购机会。",
+      "source": "RetailNext官方博客",
+      "sourceUrl": "https://retailnext.net/blog/empowering-retails-future-retailnexts-new-chapter"
+    },
+    {
+      "company": "V-Count",
+      "tag": "参展",
+      "tagType": "tag-green",
+      "title": "参展英国零售技术展RTS 2026，展示AI客流与队列管理方案",
+      "body": "V-Count参加2026年4月英国零售技术展，展示Nano AI、Ultima Go等产品线，强调99%精度和覆盖130+国家600+企业客户规模，官网同期更新2026版完整客流分析指南。",
+      "source": "V-Count博客",
+      "sourceUrl": "https://v-count.com/blog/v-count-at-the-retail-technology-show/"
+    },
+    {
+      "company": "Sensormatic",
+      "tag": "市场拓展",
+      "tagType": "tag-green",
+      "title": "亮相CHINASHOP 2026（杭州），推进中国市场Re-ID布局",
+      "body": "Sensormatic参展CHINASHOP 2026（杭州，4月15-17日），重点推广Re-ID客流识别技术和ShopperTrak Analytics，合作伙伴Avery Dennison与Zebra Technologies联合参展，聚焦中国零售市场整合部署场景。",
+      "source": "Sensormatic CHINASHOP落地页",
+      "sourceUrl": "https://www.sensormatic.com/en_uk/landing/ChinaShop-2026"
+    }
+  ],
+  "market": [
+    {
+      "tag": "英国客流指数",
+      "tagType": "tag-blue",
+      "title": "英国5月客流同比-2.6%，较4月-10.7%大幅收窄",
+      "body": "BRC-Sensormatic 6月5日数据（统计期5月3-30日）：英国总客流同比-2.6%；高街-1.5%；购物中心-2.4%（跌幅最深）；零售公园-0.5%。苏格兰+0.4%为唯一正增长，威尔士-5%跌幅最大。月末创纪录高温导致客流急剧下滑，叠加消费者信心疲软持续压制。",
+      "source": "FashionUnited / BRC-Sensormatic",
+      "sourceUrl": "https://fashionunited.uk/news/retail/footfall-figures-continue-to-decline-as-heatwave-impacts-activity/2026060588449"
+    },
+    {
+      "tag": "市场规模",
+      "tagType": "tag-green",
+      "title": "全球客流计数市场2026年达16.4亿美元，CAGR 12.78%",
+      "body": "Mordor Intelligence最新预测，全球People Counting System市场2026年规模16.4亿美元，2031年将增至29.9亿美元，CAGR 12.78%。AI摄像头与边缘计算方案正快速替代传统红外光束产品，驱动ASP和ARR双升。",
+      "source": "Mordor Intelligence",
+      "sourceUrl": "https://www.mordorintelligence.com/industry-reports/people-counting-system-market"
+    }
+  ],
+  "tech": [
+    {
+      "tag": "毫米波雷达",
+      "tagType": "tag-purple",
+      "title": "新研究：低成本60GHz毫米波雷达实现98.86%人数统计精度",
+      "body": "《Sensors》期刊2026年2月16日论文（赫瑞-瓦特大学）：基于Infineon BGT60TR13C单芯片的双谱融合框架，将Doppler-时间谱与距离-时间谱同时输入改良版ResNet-50，实现0-3人场景下98.86%计数精度，6类运动模式分类精度95.45%，单芯片低成本方案无需多传感器阵列，隐私完全合规。",
+      "source": "PubMed / Sensors (MDPI)",
+      "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/41755228/"
+    },
+    {
+      "tag": "Edge AI",
+      "tagType": "tag-blue",
+      "title": "Xovis PF-Series验证Edge AI商业可行性：安装点位减少60%",
+      "body": "Xovis与Synaptics合作在PF-Series中集成Astra SL1680 SoC，实现毫秒级边缘推理与3D立体视觉融合，单台覆盖面积约为旧款4倍，显著降低大型场所部署成本和带宽需求，Synaptics称其为\"Edge AI集成的清晰验证点\"。",
+      "source": "Xovis / Synaptics官网",
+      "sourceUrl": "https://www.xovis.com/insights/detail/xovis-future-proofs-physical-analytics-with-synaptics-soc"
+    },
+    {
+      "tag": "AI算法",
+      "tagType": "tag-green",
+      "title": "Re-ID技术成2026年高端客流系统标配，无人脸数据追踪全路径",
+      "body": "Sensormatic（Orbit AI）等多家厂商将Re-ID技术作为2026年差异化核心，依据服装颜色、体型等特征跨镜头识别同一购物者，无需人脸数据即可实现完整购物路径分析（入店→选品区→收银台→离店），正成为转化率分析和动线优化的关键支撑。",
+      "source": "Sensormatic NRF 2026新闻稿",
+      "sourceUrl": "https://sensormatic.com/resources/pr/2025/nrf-2026-reid-video-ai-press-release"
+    }
+  ],
+  "compliance": "欧盟理事会与议会2026年5月7日就《数字综合法案（AI Act修正）》达成临时协议，生物特征识别等高风险AI系统合规截止日期从2026年8月延至<a href='https://www.biometricupdate.com/202605/eu-pushes-ai-act-deadlines-for-high-risk-systems-including-biometrics' target='_blank'>2027年12月2日</a>；标准客流计数（不含身份识别）暂不在高风险分类范围内，含性别/年龄属性分析功能的产品建议持续关注正式通过文本。",
+  "global": [
+    {
+      "region": "北美",
+      "headline": "美国小企业5月到店交易连续第7个月下滑",
+      "body": "Paychex/IHS Markit数据：2026年5月美国小企业交易笔数同比-2.4%（连续7个月下滑），客单价+3.1%，线上渠道同比+11.1%持续分流实体流量，实体零售客流压力未减。"
+    },
+    {
+      "region": "亚太",
+      "headline": "韩国GS25×Fainders.AI推进纯视觉AI无人店，替代重量传感",
+      "body": "韩国GS25与Fainders.AI在首尔推出仅用2D摄像头的纯视觉识别无人便利店，货架容量提升50%，部署成本显著低于传统重量感应方案，AI视觉替代传感器的趋势加速。"
+    },
+    {
+      "region": "中东",
+      "headline": "UAE购物中心客流超疫情前125%，客流分析需求随之激增",
+      "body": "UAE购物中心客流已超2019年基准25%，为全球复苏最强市场，Mordor预测UAE零售市场2033年达2270亿美元。Footfallcam在UAE拥有本地合作伙伴Araya Solutions（迪拜10年合作），多家客流厂商加速布局。"
+    }
+  ],
+  "nextweek": [
+    "关注BRC-Sensormatic 6月客流首周数据，判断高温效应是否延续至夏季",
+    "跟踪EU AI Act《数字综合法案》正式投票时间表（临时协议待欧洲议会正式通过）",
+    "监测Xovis PF-Series在大型零售/交通场所的新中标案例",
+    "关注RetailNext在Battery Ventures支持下的并购动向"
+  ],
+  "issue": 1,
+  "period": "2026年6月2日 — 2026年6月8日"
+};
+
+// ============================================================
+// RENDER
+// ============================================================
+document.addEventListener('DOMContentLoaded', () => {
+
+  // Highlights
+  const hl = document.getElementById('highlights');
+  data.highlights.forEach(h => {
+    const typeClass = h.type === 'red' ? 'red' : h.type === 'green' ? 'green' : '';
+    hl.innerHTML += `
+      <div class="highlight-card ${typeClass}">
+        <div class="highlight-label">${h.label}</div>
+        <div class="highlight-text">${h.text}</div>
+      </div>`;
+  });
+
+  // Competitor cards
+  const cc = document.getElementById('cards-competitor');
+  document.getElementById('count-competitor').textContent = data.competitors.length + ' 条';
+  data.competitors.forEach(c => {
+    cc.innerHTML += `
+      <div class="card">
+        <div class="card-company"><span class="competitor-dot"></span>${c.company} <span class="tag ${c.tagType}">${c.tag}</span></div>
+        <div class="card-title">${c.title}</div>
+        <div class="card-body">${c.body}</div>
+        <div class="card-footer">
+          <span class="card-source">来源：<a href="${c.sourceUrl}" target="_blank">${c.source}</a></span>
+        </div>
+      </div>`;
+  });
+
+  // Market cards
+  const mc = document.getElementById('cards-market');
+  document.getElementById('count-market').textContent = data.market.length + ' 条';
+  data.market.forEach(m => {
+    mc.innerHTML += `
+      <div class="card">
+        <div class="card-company"><span class="tag ${m.tagType}">${m.tag}</span></div>
+        <div class="card-title">${m.title}</div>
+        <div class="card-body">${m.body}</div>
+        <div class="card-footer">
+          <span class="card-source">来源：<a href="${m.sourceUrl}" target="_blank">${m.source}</a></span>
+        </div>
+      </div>`;
+  });
+
+  // Tech cards
+  const tc = document.getElementById('cards-tech');
+  document.getElementById('count-tech').textContent = data.tech.length + ' 条';
+  data.tech.forEach(t => {
+    tc.innerHTML += `
+      <div class="card">
+        <div class="card-company"><span class="tag ${t.tagType}">${t.tag}</span></div>
+        <div class="card-title">${t.title}</div>
+        <div class="card-body">${t.body}</div>
+        <div class="card-footer">
+          <span class="card-source">来源：<a href="${t.sourceUrl}" target="_blank">${t.source}</a></span>
+        </div>
+      </div>`;
+  });
+
+  // Compliance
+  document.getElementById('compliance-content').innerHTML = `
+    <div class="compliance-bar">
+      <div class="compliance-icon">⚖️</div>
+      <div class="compliance-text">${data.compliance}</div>
+    </div>`;
+
+  // Global
+  const gg = document.getElementById('global-grid');
+  data.global.forEach(g => {
+    gg.innerHTML += `
+      <div class="global-card">
+        <div class="global-region">${g.region}</div>
+        <div class="global-headline">${g.headline}</div>
+        <div class="global-body">${g.body}</div>
+      </div>`;
+  });
+
+  // Next week
+  const nw = document.getElementById('nextweek');
+  const total = data.competitors.length + data.market.length + data.tech.length + 1 + data.global.length;
+  document.getElementById('stat-items').textContent = total;
+  nw.innerHTML = `<div class="nextweek-title">📌 下周重点关注</div><ul>` +
+    data.nextweek.map(i => `<li>${i}</li>`).join('') + `</ul>`;
+});
+</script>
+</body>
+</html>

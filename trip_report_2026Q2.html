@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Milesight VS产品线 出差总结报告 2026 Q2</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: "Microsoft YaHei", "PingFang SC", sans-serif; font-size: 14px; color: #2c3e50; background: #f4f6f9; }
+  .page-header { background: linear-gradient(135deg, #1a3a5c 0%, #2980b9 100%); color: #fff; padding: 36px 48px; }
+  .page-header h1 { font-size: 26px; font-weight: 700; margin-bottom: 6px; }
+  .page-header .subtitle { font-size: 14px; opacity: 0.85; }
+  .meta-bar { background: #fff; border-bottom: 1px solid #e0e6ed; padding: 12px 48px; display: flex; gap: 32px; font-size: 13px; color: #555; }
+  .meta-bar span strong { color: #1a3a5c; }
+  .container { max-width: 1100px; margin: 0 auto; padding: 28px 24px; }
+  .toc { background: #fff; border-radius: 8px; padding: 20px 28px; margin-bottom: 28px; box-shadow: 0 1px 4px rgba(0,0,0,.06); }
+  .toc h3 { font-size: 15px; color: #1a3a5c; margin-bottom: 12px; border-left: 4px solid #2980b9; padding-left: 10px; }
+  .toc ol { padding-left: 20px; }
+  .toc li { margin-bottom: 4px; }
+  .toc a { color: #2980b9; text-decoration: none; }
+  .toc a:hover { text-decoration: underline; }
+  .section { background: #fff; border-radius: 8px; padding: 24px 28px; margin-bottom: 24px; box-shadow: 0 1px 4px rgba(0,0,0,.06); }
+  .section-title { font-size: 18px; font-weight: 700; color: #1a3a5c; border-left: 5px solid #2980b9; padding-left: 12px; margin-bottom: 18px; }
+  .section-subtitle { font-size: 15px; font-weight: 600; color: #2c3e50; margin: 18px 0 10px; border-bottom: 1px solid #e8ecf0; padding-bottom: 6px; }
+  .client-card { border: 1px solid #dde3ea; border-radius: 6px; margin-bottom: 18px; overflow: hidden; }
+  .client-header { background: #f0f4f8; padding: 10px 16px; display: flex; align-items: center; justify-content: space-between; }
+  .client-name { font-weight: 700; font-size: 15px; color: #1a3a5c; }
+  .client-meta { font-size: 12px; color: #666; }
+  .tag { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: 600; margin-left: 6px; }
+  .tag-vip { background: #fef3cd; color: #856404; }
+  .tag-core { background: #d4edda; color: #155724; }
+  .tag-new { background: #cce5ff; color: #004085; }
+  .client-body { padding: 14px 16px; }
+  .client-body ul { padding-left: 18px; }
+  .client-body li { margin-bottom: 5px; line-height: 1.6; }
+  .highlight-box { background: #fff8e1; border-left: 4px solid #f39c12; padding: 10px 14px; border-radius: 0 4px 4px 0; margin: 12px 0; font-size: 13px; }
+  .action-box { background: #e8f4fd; border-left: 4px solid #2980b9; padding: 10px 14px; border-radius: 0 4px 4px 0; margin: 12px 0; font-size: 13px; }
+  .risk-box { background: #fdecea; border-left: 4px solid #e74c3c; padding: 10px 14px; border-radius: 0 4px 4px 0; margin: 12px 0; font-size: 13px; }
+  .summary-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 14px; }
+  .summary-card { border: 1px solid #e0e6ed; border-radius: 6px; padding: 14px; text-align: center; }
+  .summary-card .num { font-size: 28px; font-weight: 700; color: #2980b9; }
+  .summary-card .label { font-size: 12px; color: #666; margin-top: 4px; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 12px; }
+  table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 13px; }
+  th { background: #f0f4f8; color: #1a3a5c; font-weight: 600; padding: 8px 12px; text-align: left; border: 1px solid #dde3ea; }
+  td { padding: 8px 12px; border: 1px solid #dde3ea; vertical-align: top; line-height: 1.5; }
+  tr:nth-child(even) td { background: #fafbfc; }
+  .trip-badge { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 12px; font-weight: 600; }
+  .badge-na { background: #d4edda; color: #155724; }
+  .badge-br { background: #fce8d5; color: #7d3c0a; }
+  .badge-sg { background: #e8d8f7; color: #4a235a; }
+  .conclusion-item { display: flex; gap: 12px; margin-bottom: 12px; align-items: flex-start; }
+  .conclusion-num { background: #2980b9; color: #fff; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; flex-shrink: 0; }
+  h4 { font-size: 13px; font-weight: 600; color: #34495e; margin-bottom: 6px; }
+  .footer { text-align: center; padding: 20px; color: #999; font-size: 12px; }
+</style>
+</head>
+<body>
+<div class="page-header">
+  <h1>VS产品线 出差拜访总结报告</h1>
+  <div class="subtitle">整合北美 / 巴西 / 新加坡三次出差记录 · 生成日期：2026年6月</div>
+</div>
+<div class="meta-bar">
+  <span><strong>覆盖时间：</strong>2025年9月 — 2026年5月</span>
+  <span><strong>拜访地区：</strong>北美（加拿大 + 美国）/ 巴西 / 新加坡</span>
+  <span><strong>拜访客户：</strong>20+ 家</span>
+  <span><strong>产品线焦点：</strong>VS人数统计 / 楼宇占用 / Smart Restroom / IoT</span>
+</div>
+
+<div class="container">
+
+  <!-- 目录 -->
+  <div class="toc">
+    <h3>目录</h3>
+    <ol>
+      <li><a href="#overview">一、总览与核心结论</a></li>
+      <li><a href="#northamerica">二、北美出差（2026年4月）</a>
+        <ol style="margin-top:4px">
+          <li><a href="#a1">A1 Innovation（加拿大，VIP）</a></li>
+          <li><a href="#prodco">Prodco Analytics（加拿大，VIP）</a></li>
+          <li><a href="#axper">Axper（加拿大，VIP）</a></li>
+          <li><a href="#fsi">FeedbackSolution（加拿大，VIP）</a></li>
+          <li><a href="#sensource">Sensource（美国，VIP）</a></li>
+          <li><a href="#facilitysight">FacilitySight（美国，VIP）</a></li>
+          <li><a href="#avuity">AVUITY（美国）</a></li>
+          <li><a href="#fmsystem">FM System / JCI（美国，远程）</a></li>
+        </ol>
+      </li>
+      <li><a href="#brazil">三、巴西出差（2026年4月—5月）</a></li>
+      <li><a href="#singapore">四、新加坡BEX展会（2025年9月）</a></li>
+      <li><a href="#actions">五、重点行动项汇总</a></li>
+    </ol>
+  </div>
+
+  <!-- 总览 -->
+  <div class="section" id="overview">
+    <div class="section-title">一、总览与核心结论</div>
+    <div class="summary-grid">
+      <div class="summary-card"><div class="num">8</div><div class="label">北美核心客户拜访</div></div>
+      <div class="summary-card"><div class="num">15+</div><div class="label">巴西客户拜访</div></div>
+      <div class="summary-card"><div class="num">114</div><div class="label">新加坡BEX接待人数</div></div>
+    </div>
+
+    <div class="section-subtitle">核心结论</div>
+    <div class="conclusion-item">
+      <div class="conclusion-num">1</div>
+      <div><strong>北美零售人数统计市场：Re-ID是最紧迫的产品缺口。</strong>多家渠道商（Sensource、Prodco、Axper）明确反映因缺少Re-ID功能而在竞标中输给ShopperTrack等竞品。首个可用版本（精度70%）已被接受，需尽快推进。</div>
+    </div>
+    <div class="conclusion-item">
+      <div class="conclusion-num">2</div>
+      <div><strong>VS361（店外客流）有需求，但必须支持独立POE工作。</strong>现有VS361依赖VS125或路由器联动，推广阻力大、安装成本高。客户普遍希望VS361作为独立POE设备直接上传数据，且价格需降至3D传感器的1/2～1/3。</div>
+    </div>
+    <div class="conclusion-item">
+      <div class="conclusion-num">3</div>
+      <div><strong>轮椅/婴儿车属性识别是楼宇场景（图书馆、博物馆）的刚性需求。</strong>FacilitySight明确表示"敢保证能下更多单"，Xovis已有此功能（约80%准确率）。MS需跟进，否则将在公共设施场景持续失单。</div>
+    </div>
+    <div class="conclusion-item">
+      <div class="conclusion-num">4</div>
+      <div><strong>巴西市场：Smart Restroom是当前最成熟、最易复制的方案，已具备明确Pipeline。</strong>Motiva Autoban（39站/150个卫生间）、Allos、Iguatemi等大客户已进入PoC阶段，VS350/GS301/UG65组合方案验证成熟。</div>
+    </div>
+    <div class="conclusion-item">
+      <div class="conclusion-num">5</div>
+      <div><strong>楼宇占用（Occupancy）是北美和巴西的共同高增长方向。</strong>VS121/VS321/VS341在企业办公、图书馆、医疗等场景需求旺盛；Avuity、FacilitySight、Deskbee均在大力推进此类项目。</div>
+    </div>
+    <div class="conclusion-item">
+      <div class="conclusion-num">6</div>
+      <div><strong>NDAA合规是北美政府/教育项目的真实阻碍。</strong>多家渠道商（Sensource、FeedbackSolution等）反映政府、大学、军方客户因中国原产地要求拒绝采购。MS海外工厂规划应加快推进。</div>
+    </div>
+    <div class="conclusion-item">
+      <div class="conclusion-num">7</div>
+      <div><strong>Xovis PF（超广角传感器）尚未成熟，MS有窗口期。</strong>多家客户反映PF固件不稳定，存在遮挡识别、高矮人群误判等问题，测试仍在进行中。MS VS121 Pro菊花链级联方案是有力竞争策略。</div>
+    </div>
+  </div>
+
+  <!-- 北美出差 -->
+  <div class="section" id="northamerica">
+    <div class="section-title">二、北美出差（2026年4月）</div>
+    <p style="color:#555;margin-bottom:16px">覆盖加拿大（多伦多/蒙特利尔）+ 美国（俄亥俄/辛辛那提），拜访8家核心渠道商和SI，重点聚焦VS人数统计产品的应用反馈与合作深化。</p>
+
+    <!-- A1 -->
+    <div class="client-card" id="a1">
+      <div class="client-header">
+        <div class="client-name">A1 Innovation <span class="tag tag-vip">VIP</span></div>
+        <div class="client-meta">加拿大 · 多伦多 · 系统集成商 · 2025年采购额 USD 197K</div>
+      </div>
+      <div class="client-body">
+        <div class="section-subtitle" style="margin-top:0">公司概况</div>
+        <p>位于安大略省里士满山，团队约15人，年均采购VS传感器1,000+台，以TOF为主、立体视觉需求快速增长。近两年采购额从USD 61K跳升至USD 197K，是北美成长最快的核心渠道商。核心战略是从"人数统计硬件商"转型为"人与车辆流动管理 + 智慧楼宇 + 可持续运营"整体解决方案提供商。</p>
+
+        <div class="section-subtitle">重点在建项目</div>
+        <table>
+          <tr><th>项目名称</th><th>规模</th><th>进展</th><th>产品</th></tr>
+          <tr><td>Cadillac Fairview（购物中心连锁）</td><td>19个Mall，估计1,200-1,400台</td><td>Phase 2（5个Mall，506台）进行中，Phase 3待推进</td><td>VS125/VS135为主</td></tr>
+          <tr><td>多伦多GTAA机场</td><td>33个卫生间，约1,700台设备</td><td>14个卫生间已部署，500台May-Jun发货，其余Aug-Sep</td><td>VS系列 + AM319 + IoT</td></tr>
+          <tr><td>埃托比科市民中心（ECC）</td><td>188台VS121 + 124台AM319</td><td>Q3 2027部署，CO检测需求已确认</td><td>VS121 + AM319</td></tr>
+        </table>
+
+        <div class="section-subtitle">产品反馈与需求</div>
+        <ul>
+          <li><strong>TOF覆盖高度严重不足：</strong>VS126在60-70英尺（约18-21米）高挑空场景（机场、大型商超）精度和覆盖均不足，Xovis可达60ft，MS仅约20ft，这是丢单的直接原因</li>
+          <li><strong>Re-ID需求：</strong>有餐饮客户已准备2-3个月内启动Re-ID PoC，以实现路径追踪和员工排除</li>
+          <li><strong>热力图需求：</strong>无需抓脸的热力图分析适合高挑空商场，客户有需求</li>
+          <li><strong>LoRa远程固件升级需求：</strong>大型项目（如机场）的固件维护成本高，希望支持LoRa OTA</li>
+          <li><strong>包装/物流文档：</strong>提出需改进设备包装和出货文档标准</li>
+        </ul>
+
+        <div class="highlight-box"><strong>战略价值：</strong>A1希望成为MS在北美最大渠道商，统管其他合作伙伴订单。其美国市场扩张H2 2026提速，是MS北美渗透的最重要支点。双方已同意建立"产品评审机制"。</div>
+        <div class="action-box"><strong>行动项：</strong>①明确TOF传感器极限安装高度并对外发布；②推进Re-ID首个版本PoC支持；③与A1共同制定2027年合作框架（联合演讲/联合参展）；④改进包装文档规范</div>
+      </div>
+    </div>
+
+    <!-- Prodco -->
+    <div class="client-card" id="prodco">
+      <div class="client-header">
+        <div class="client-name">Prodco Analytics <span class="tag tag-vip">VIP</span></div>
+        <div class="client-meta">加拿大 · 蒙特利尔 · 1995年成立 · 35,000+安装点 · 42个国家</div>
+      </div>
+      <div class="client-body">
+        <p>全球级零售人数统计专业公司，欧洲占50%、美洲占40%，有强大的全球渠道网络。正在测试VS125-P、VS133-P、VS351、VS361+UR32等产品。</p>
+        <div class="section-subtitle">关键需求</div>
+        <ul>
+          <li><strong>员工排除（Re-ID）：</strong>明确为最核心需求，现有项目因此输给竞品</li>
+          <li><strong>VS361独立POE：</strong>当前UR32连接方案存在配置问题且增加成本，客户明确希望VS361直接POE接入、价格不变</li>
+          <li><strong>覆盖范围：</strong>列为第二优先需求</li>
+          <li><strong>购物车检测：</strong>新兴兴趣点，初步提出</li>
+          <li><strong>交通工具（公交/卡车）计数：</strong>通过IPC方案实现，有需求</li>
+        </ul>
+        <div class="action-box"><strong>行动项：</strong>①VS361 POE独立版本立项评估；②Re-ID员工排除功能优先推进；③UR32L配置问题技术跟进</div>
+      </div>
+    </div>
+
+    <!-- Axper -->
+    <div class="client-card" id="axper">
+      <div class="client-header">
+        <div class="client-name">Axper <span class="tag tag-vip">VIP</span></div>
+        <div class="client-meta">加拿大 · 蒙特利尔 · Xovis金牌合作伙伴 · 年采购3,000+台</div>
+      </div>
+      <div class="client-body">
+        <p>Xovis核心经销商，拥有自研Axper Analytics平台，30人团队，95%室内场景，积极评估切换或补充MS方案。2026年已规划完整测试套件（立体视觉/VS361/UWB）。</p>
+        <div class="section-subtitle">产品反馈与需求</div>
+        <ul>
+          <li><strong>群体计数优化：</strong>希望增加互动维度、视线关联维度，当前8秒窗口逻辑有局限</li>
+          <li><strong>性别识别改进：</strong>加拿大男性长发问题导致误识别率高</li>
+          <li><strong>Re-ID跨摄像头追踪：</strong>明确需求</li>
+          <li><strong>轮椅/婴儿车检测：</strong>楼宇方向扩展的关键能力需求</li>
+          <li><strong>位置元数据上报：</strong>希望响应时间降至800ms-1s</li>
+          <li><strong>极端低温（-30°C）：</strong>户外加拿大冬季场景需求</li>
+          <li><strong>AI Box：</strong>复杂推理场景，客户表示可接受</li>
+        </ul>
+        <div class="highlight-box"><strong>竞品观察：</strong>对Xovis PF持观望态度，认为固件多次迭代不稳定，已预约MS测试（7月起）。客户认为PF的Re-ID是Xovis推出该产品的核心目的，但功能成熟度仍待验证。</div>
+        <div class="action-box"><strong>行动项：</strong>①7月启动完整产品测试，提供稳定测试固件；②推进轮椅/婴儿车识别能力；③低温测试支持</div>
+      </div>
+    </div>
+
+    <!-- FeedbackSolution -->
+    <div class="client-card" id="fsi">
+      <div class="client-header">
+        <div class="client-name">FeedbackSolution（FSI）<span class="tag tag-new">新</span></div>
+        <div class="client-meta">加拿大 · 伯灵顿 · 2013年 · 14人 · 90%业务在美国</div>
+      </div>
+      <div class="client-body">
+        <p>专注于HVAC占用优化的系统集成商（BACnet/IP），主要客户为大学（NYU）、办公楼、健身房。现有硬件合作伙伴包括GIKEN、Terabee、Xovis，正在测试VS125/VS125-LW/VS321。</p>
+        <div class="section-subtitle">关键需求与反馈</div>
+        <ul>
+          <li>只需高精度人数统计，不需要额外AI功能；偏好POE连接，LoRaWAN可用于IAQ/温度传感器</li>
+          <li>EG71作为协议转换器（支持Niagara驱动是加分项）</li>
+          <li>VS125测试结果满意，主要顾虑是美国市场进口关税和中国品牌因素</li>
+          <li>没有CO2检测预算问题（暗示已有相关需求）</li>
+        </ul>
+        <div class="risk-box"><strong>风险提示：</strong>美国进口关税和中国品牌认知是该客户群体（大学、政府）的主要障碍，需NDAA方案或海外工厂支持。</div>
+      </div>
+    </div>
+
+    <!-- Sensource -->
+    <div class="client-card" id="sensource">
+      <div class="client-header">
+        <div class="client-name">Sensource <span class="tag tag-vip">VIP</span></div>
+        <div class="client-meta">美国 · 俄亥俄州 · 2002年 · 20+人 · Xovis金牌合作伙伴 · 累计部署50,000+台</div>
+      </div>
+      <div class="client-body">
+        <p>美国头部人数统计SI，拥有自研Vea Analytics平台，业务覆盖美国/加拿大/墨西哥，280名认证低压电工。MS目前占其收入约1%，目标2026年提升至20%竞品替换份额。已将VS125部署于教堂（暗环境）场景，体现独特竞争力。</p>
+        <div class="section-subtitle">产品反馈与需求</div>
+        <ul>
+          <li><strong>Re-ID需求（最高优先）：</strong>已因缺少Re-ID输给ShopperTrack零售项目；明确需要"员工排除"（员工全天进出只计1次）、"唯一访客识别"、"路径追踪"三大用例；首个版本70%精度可接受，先有后优化</li>
+          <li><strong>VS125数据重传丢包：</strong>已在监控中，希望修复</li>
+          <li><strong>设备日常图像抓拍监控：</strong>每日主动推送传感器截图，用于远程健康检查</li>
+          <li><strong>固件策略：</strong>当前迭代过快，希望提供稳定版（长期）+持续更新版（新功能）两套固件</li>
+          <li><strong>中性固件升级兼容性：</strong>担忧白标固件升级与标准固件不兼容，已解释并承诺一致</li>
+          <li><strong>UWB员工检测：</strong>已有样机，待优化固件测试；认为UWB与Re-ID不冲突，分别服务不同客户群</li>
+          <li><strong>VS361店外客流：</strong>需要独立POE方案；强调远程管理能力是核心</li>
+        </ul>
+        <div class="section-subtitle">竞品评估（Xovis PF）</div>
+        <ul>
+          <li>PF样机测试中，两次固件均有问题，测试未完成</li>
+          <li>客户测试将检验传感器正下方及边缘精度，尤其是大流量场景下的准确率</li>
+          <li>认为Xovis PF推出时机过早；覆盖范围大但遮挡识别不稳定、无法穿墙、高矮人群识别误差大</li>
+          <li>认为VS121菊花链级联（配合AI外观特征Re-ID）是正确方向</li>
+        </ul>
+        <div class="section-subtitle">合作模式讨论</div>
+        <ul>
+          <li>Amazon在售MS产品定价接近Sensource拿货价，需MAP价格管控</li>
+          <li>希望与MS建立ASP合作关系，双方共赢</li>
+          <li>对未来联合参展NRF等展会表示兴趣</li>
+          <li>期待MS在楼宇方案（智慧楼宇）提供见解和输出支持</li>
+        </ul>
+        <div class="highlight-box"><strong>行业洞察：</strong>FacilitySight在图书馆/博物馆场景的智慧楼宇转型已证明成功（通过整合MS多条产品线实现增长）；Sensource已观察到此趋势并计划跟进拓展。</div>
+        <div class="action-box"><strong>行动项：</strong>①Re-ID首个可用版本（70%精度）尽快排期；②修复VS125数据重传丢包；③建立稳定版+更新版双轨固件策略；④确认Amazon定价管控；⑤推进UWB优化固件；⑥联合参展计划（NRF等）落实</div>
+      </div>
+    </div>
+
+    <!-- FacilitySight -->
+    <div class="client-card" id="facilitysight">
+      <div class="client-header">
+        <div class="client-name">FacilitySight（FS）<span class="tag tag-core">核心</span></div>
+        <div class="client-meta">美国 · 人数统计SaaS平台 · 以图书馆/博物馆为主 · 70-80%业务来自图书馆</div>
+      </div>
+      <div class="client-body">
+        <p>美国聚焦公共设施（图书馆/博物馆）的人数统计SaaS公司，收入结构软件80%+硬件20%，年均新客户增长2-3倍。已完成VS125+VS133集成，正在开发新平台（Nexus），过渡期暂停新设备集成。</p>
+        <div class="section-subtitle">产品需求</div>
+        <ul>
+          <li><strong>轮椅/婴儿车识别（最高优先）：</strong>图书馆申请政府资助需要精确的人口统计分类数据；Anjelo明确表示"有了婴儿车识别敢保证下更多单"，可协助提供训练样本；Xovis此功能约80%精度</li>
+          <li><strong>Re-ID（唯一访客）：</strong>需要跨访问周期识别新/回头访客，用于联邦/州政府资助申报；Hash值匿名化方案可接受</li>
+          <li><strong>UWB员工检测：</strong>对UWB技术感兴趣（比蓝牙/Wifi更适合），10个TAG上限能满足大多数场景</li>
+          <li><strong>VS361：</strong>在零售场景与VS125搭配使用效果好，目前公共设施需求较少</li>
+          <li><strong>AI Box方案：</strong>客户表示接受（视频+音频+人数统计一体化设备方向）</li>
+          <li><strong>VLM功能：</strong>不需要在设备端实现，平台侧来做</li>
+          <li><strong>服务动物（导盲犬/辅助犬）识别：</strong>已知Xovis在研发中，FS希望MS同步关注</li>
+        </ul>
+        <div class="section-subtitle">合作模式</div>
+        <ul>
+          <li>中性设备（无品牌标识）是必须，简约包装，适配历史建筑美学要求</li>
+          <li>销售模式以直销为主，渠道仅用于政府准入项目</li>
+          <li>支持将测试设备免费赠予终端（图书馆）用于建立信任</li>
+          <li>希望IoT项目扩展（GS301智慧卫生间方案，移动公交图书馆项目）</li>
+        </ul>
+        <div class="action-box"><strong>行动项：</strong>①轮椅/婴儿车识别能力排期（最高优先）；②Re-ID支持唯一访客Hash值方案；③推进UWB样机正式发布后申请测试；④GS301智慧卫生间方案分享；⑤协助获取轮椅/婴儿车训练样本</div>
+      </div>
+    </div>
+
+    <!-- AVUITY -->
+    <div class="client-card" id="avuity">
+      <div class="client-header">
+        <div class="client-name">AVUITY</div>
+        <div class="client-meta">美国 · 辛辛那提 · 2012年 · 企业办公空间管理 · 2025年硬件销售额 USD 300万+</div>
+      </div>
+      <div class="client-body">
+        <p>专注企业办公空间占用监测，核心竞争力是Viewspace软件平台（全球多地点统一管理），主要服务跨国大型企业，传感器部署达数万台。正处于从硬件销售向软件价值驱动的战略转型期，希望寻找长期稳定硬件合作伙伴。</p>
+        <div class="section-subtitle">合作机会</div>
+        <ul>
+          <li>已明确希望将硬件全面外包给合作方，自身聚焦软件和AI；MS是重点候选</li>
+          <li>VS373（雷达跌倒检测）是新合作入口：美国养老市场爆发式增长，跌倒检测是刚需，当前市场尚无优质非接触式方案，客户认为是蓝海市场</li>
+          <li>现场直接赠送VS125一台，关注后续测试进展</li>
+          <li>与CBRE、JLL等全球头部地产公司有合作渠道，是楼宇渠道拓展的重要入口</li>
+        </ul>
+        <div class="section-subtitle">行业竞争格局</div>
+        <ul>
+          <li>主要竞争对手VergeSense：靠融资烧钱抢市场，硬件质量不稳定，大量客户流失转向Avuity</li>
+          <li>旧楼改造项目由埃森哲、德勤等传统咨询公司主导（关注成本）；新建筑由建筑设计公司主导（高话语权），欧洲市场尤其依赖建筑设计渠道，建议MS重点拓展</li>
+        </ul>
+        <div class="action-box"><strong>行动项：</strong>①VS373样品寄送与测试跟进；②解决当前占用传感器数据准确性问题；③平台PA客户意向深度推进；④评估通过Avuity拓展CBRE/JLL等地产渠道的可能性</div>
+      </div>
+    </div>
+
+    <!-- FM System -->
+    <div class="client-card" id="fmsystem">
+      <div class="client-header">
+        <div class="client-name">FM System / JCI</div>
+        <div class="client-meta">美国 · 1984年 · 200+人 · IWMS行业领导者 · 2023年被JCI收购</div>
+      </div>
+      <div class="client-body">
+        <p>IWMS领域领导者（1,400+项目，全球部署），2023年被江森自控（JCI）收购后品牌全面更名，产品线整合进JCI体系。主要营收为SaaS，部署250K+传感器（以占用传感器、CO2、湿度、光照为主）。</p>
+        <div class="section-subtitle">与MS合作现状</div>
+        <ul>
+          <li>2025年2月重新建联（此前因政府项目的中国厂商敏感性暂停合作）</li>
+          <li>已完成VS351、AM308、WS202等产品集成，主要驱动力是欧洲客户的LoRaWAN需求</li>
+          <li>收购后对接模式变化：从点对点集成改为通过ob platform中间件快速集成，已集成BUTLR、Enlightened、IGOR</li>
+          <li>目前使用AWS IoT Core作为LNS，支持网关包转发和Cloud-to-Cloud两种集成方式</li>
+        </ul>
+        <div class="risk-box"><strong>注意：</strong>政府客户占比较高，中国厂商/服务器的安全顾虑是持续障碍，需关注JCI整体合规策略变化。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 巴西出差 -->
+  <div class="section" id="brazil">
+    <div class="section-title">三、巴西出差（2026年4月—5月）</div>
+    <p style="color:#555;margin-bottom:16px">出差覆盖圣保罗、福塔雷萨等城市，拜访15+家客户/合作伙伴，涵盖Smart Restroom（FM）、楼宇占用、IoT网关、温湿度（TH）、医疗冷链等多个方向。</p>
+
+    <div class="section-subtitle">战略评估结论</div>
+    <table>
+      <tr><th>方向</th><th>评级</th><th>理由</th></tr>
+      <tr><td>Smart Restroom Solution（FM）</td><td style="color:#27ae60;font-weight:700">★★★★★ 战略优先</td><td>最成熟、最易复制，销售通道具备，明确Pipeline；VS350/GS301/UG65组合方案已验证</td></tr>
+      <tr><td>楼宇占用（Occupancy）</td><td style="color:#2980b9;font-weight:700">★★★★ 高潜力</td><td>Deskbee/Velans/Verzani等多条线索并进，VS321/VS121方案被验证</td></tr>
+      <tr><td>IoT生态（网关/LoRa）</td><td style="color:#2980b9;font-weight:700">★★★★ 良好</td><td>Digifort（85%VMS市占率）、Khomp（Intelbras子公司）等强渠道整合机会</td></tr>
+      <tr><td>温湿度（TH）</td><td style="color:#e67e22;font-weight:700">★★★ 降级</td><td>医疗冷链需求真实，但本地竞争激烈、项目碎片化、TS产品货值低，ROI不高；保留但降优先级</td></tr>
+      <tr><td>零售人数统计</td><td style="color:#7f8c8d;font-weight:700">★★ 长期布局</td><td>购物中心存在换代机会（VS125-P替换5,000台IPC），但时间周期长，作为长期平台机会培育</td></tr>
+    </table>
+
+    <div class="section-subtitle">重点客户与机会点</div>
+
+    <div class="client-card">
+      <div class="client-header">
+        <div class="client-name">Motiva Autoban（地铁/高速运营商）<span class="tag tag-core">战略</span></div>
+        <div class="client-meta">圣保罗地铁 + 巴伊亚地铁 · Smart Restroom首批规模项目</div>
+      </div>
+      <div class="client-body">
+        <ul>
+          <li>圣保罗地铁：39个站点，150个卫生间，4种部署场景，产品组合：VS350/GS301/VS135 LoRa/UG65</li>
+          <li>巴伊亚地铁：预算已批准，Orbi.AI主导执行，是Smart Restroom的核心标杆项目</li>
+          <li>此项目是巴西Smart Restroom方案最重要的标杆案例，成功后可支撑全市场复制</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="client-card">
+      <div class="client-header">
+        <div class="client-name">Grupo Iguatemi + Allos</div>
+        <div class="client-meta">巴西最大高端购物中心集团 + 巴西最大综合购物中心运营商</div>
+      </div>
+      <div class="client-body">
+        <ul>
+          <li>Iguatemi：现有5,000台IPC人数计数器，VS125-P替换PoC进行中；Smart Restroom和TH机会同步跟进</li>
+          <li>Allos：Smart Restroom PoC已启动，是巴西零售Smart Restroom的重要切入口</li>
+          <li>两家合计为巴西购物中心领域最大规模的换代机会，周期较长但规模可观</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="client-card">
+      <div class="client-header">
+        <div class="client-name">Orbi.AI <span class="tag tag-core">核心合作伙伴</span></div>
+        <div class="client-meta">SP核心渠道商 · CEO/CTO/COO专程从Fortaleza飞来参会</div>
+      </div>
+      <div class="client-body">
+        <ul>
+          <li>当前活跃项目：圣保罗市政府（约USD 4万）、Motiva巴伊亚地铁（预算已批）、Iguatemi/Allos PoC、4个中型商场卫生间项目（100+台VS350，100+台GS301，20+台UG67）</li>
+          <li>对MS合作积极性极高，飞往圣保罗参会表明战略重视</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="client-card">
+      <div class="client-header">
+        <div class="client-name">Itech（核心经销商）</div>
+        <div class="client-meta">已部署586台VS350（430台在Itaú银行，156台在体育俱乐部）</div>
+      </div>
+      <div class="client-body">
+        <ul>
+          <li>6个活跃的FM/VS卫生间项目在执行中；Petrobras楼宇占用监控项目推进中</li>
+          <li>UG网关合作（Netmore和Browan）</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="client-card">
+      <div class="client-header">
+        <div class="client-name">Deskbee <span class="tag tag-core">战略</span></div>
+        <div class="client-meta">巴西#1工作场所管理SaaS平台</div>
+      </div>
+      <div class="client-body">
+        <ul>
+          <li>VS321 PoC反馈"非常满意"；iFood项目（600-700台VS321）管道已建立</li>
+          <li>Amazon巴西占用监测谈话进行中；计划在InfraFM展会（6月9-11日）联合发布公告</li>
+          <li>是巴西楼宇占用方向的最重要SaaS渠道入口</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="client-card">
+      <div class="client-header">
+        <div class="client-name">Grupo Sonda / Sodexo</div>
+        <div class="client-meta">"Kitchen 4.0"项目 · 巴西750个厨房 · 全球7,500个厨房潜力</div>
+      </div>
+      <div class="client-body">
+        <ul>
+          <li>产品组合：TS201/EM320/TS301 + UG63/UG65</li>
+          <li>路径：6个厨房Pilot → 150个 → 750个（巴西）→ 全球7,500个厨房</li>
+          <li>这是一个可复制到全球级别的标杆项目，是TH+IoT方向最大的单一机会</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="client-card">
+      <div class="client-header">
+        <div class="client-name">Digifort</div>
+        <div class="client-meta">巴西VMS市场#1 · 85%市场占有率 · 覆盖2,400个城市中的1,800个</div>
+      </div>
+      <div class="client-body">
+        <ul>
+          <li>有意向将IoT网关（EG71）集成到其VMS平台作为聚合器，进入LoRa生态</li>
+          <li>对于MS来说是极具价值的VMS平台级合作：一旦集成，可覆盖巴西85%的VMS市场</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="client-card">
+      <div class="client-header">
+        <div class="client-name">其他重点客户（简述）</div>
+        <div class="client-meta">医疗冷链 / 楼宇管理 / IoT生态</div>
+      </div>
+      <div class="client-body">
+        <ul>
+          <li><strong>Grupo Verzani & Sandrini：</strong>巴西第二大FM公司，70,000名员工，7,000栋楼，已部署553台VS350，Stellantis/Vale/BYD/GRU机场Pipeline</li>
+          <li><strong>Rede Dor：</strong>拉丁美洲最大私立医院集团（78家医院），IAQ和能耗监测需求，PoC启动同意</li>
+          <li><strong>Khomp：</strong>巴西最强本土IoT品牌（Intelbras子公司），对UC701 IR控制器和智慧楼宇合作有兴趣</li>
+          <li><strong>Pharmalog：</strong>医疗冷链SP，评估TS60X；750个厨房场景潜力（21个传感器/厨房）</li>
+          <li><strong>Sensorweb：</strong>巴西#1医疗冷链IoT SP，评估TS602，当前供应商（Khomp）硬件缺陷率20%，切换意愿强</li>
+          <li><strong>Constanta：</strong>EMS制造商，RAK网关替换机会（约100台/年），UG65/UG67 PoC启动，已签NDA</li>
+          <li><strong>TCT Brasil：</strong>Kerlink经销商，关注智慧零售人数统计（Netmore合作），20K门店零售连锁潜力</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 新加坡BEX -->
+  <div class="section" id="singapore">
+    <div class="section-title">四、新加坡BEX展会（2025年9月）</div>
+    <div class="two-col">
+      <div>
+        <div class="section-subtitle" style="margin-top:0">展会成果</div>
+        <ul>
+          <li>接待客户114位（60%系统集成商，40%方案提供商）</li>
+          <li>刷新MS品牌影响力，完成客户关系维护和市场信息收集</li>
+          <li>市场整体对LoRa技术不陌生，多数平台支持BACnet/IP、MQTT标准协议，MS设备可快速对接</li>
+        </ul>
+        <div class="section-subtitle">展会现场客户反馈</div>
+        <ul>
+          <li><strong>Sensource：</strong>VS125/VS133低光照工作能力被认可，希望菊花链部署支持，固件稳定性是顾虑</li>
+          <li><strong>Axper：</strong>-30°C极端低温需求确认，群体计数逻辑优化需求</li>
+          <li><strong>VS373推广障碍：</strong>准确率存疑，需要更多验证案例支撑</li>
+        </ul>
+      </div>
+      <div>
+        <div class="section-subtitle" style="margin-top:0">展位改进建议</div>
+        <ul>
+          <li>背景墙设备集中上墙展示</li>
+          <li>搭建Demo支撑架</li>
+          <li>安排名片架等基础物料</li>
+        </ul>
+        <div class="section-subtitle">竞品观察</div>
+        <ul>
+          <li>几乎所有客户认可Xovis PF新品"减少部署"方向</li>
+          <li>但PF固件多次迭代不稳定，实际性能和可靠性仍待观察</li>
+          <li>Re-ID被认为是Xovis推出新品的重要动机，功能成熟度待验证</li>
+          <li>竞品网关（RAK、Tektelic）稳定性有负面反馈，MS网关有切换机会</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 行动项汇总 -->
+  <div class="section" id="actions">
+    <div class="section-title">五、重点行动项汇总</div>
+    <table>
+      <tr><th style="width:5%">#</th><th style="width:30%">行动项</th><th style="width:20%">优先级</th><th style="width:25%">涉及客户</th><th style="width:20%">负责方向</th></tr>
+      <tr><td>1</td><td>推进Re-ID首个可用版本（70%精度可接受）</td><td style="color:#e74c3c;font-weight:700">P0 最高优先</td><td>Sensource, Axper, Prodco, A1</td><td>产品研发</td></tr>
+      <tr><td>2</td><td>轮椅/婴儿车/服务动物属性识别能力</td><td style="color:#e74c3c;font-weight:700">P0 最高优先</td><td>FacilitySight, Axper</td><td>算法/固件</td></tr>
+      <tr><td>3</td><td>VS361独立POE版本评估立项</td><td style="color:#e67e22;font-weight:700">P1 高优先</td><td>Sensource, Prodco, FacilitySight</td><td>产品规划</td></tr>
+      <tr><td>4</td><td>修复VS125数据重传丢包问题</td><td style="color:#e67e22;font-weight:700">P1 高优先</td><td>Sensource</td><td>研发</td></tr>
+      <tr><td>5</td><td>建立稳定版+更新版双轨固件策略</td><td style="color:#e67e22;font-weight:700">P1 高优先</td><td>Sensource, FacilitySight</td><td>产品/研发</td></tr>
+      <tr><td>6</td><td>TOF传感器极限安装高度明确发布</td><td style="color:#e67e22;font-weight:700">P1 高优先</td><td>A1, Axper</td><td>产品/技术</td></tr>
+      <tr><td>7</td><td>VS373跌倒检测样品寄送AVUITY测试</td><td style="color:#2980b9;font-weight:700">P2 中优先</td><td>AVUITY</td><td>商务/售前</td></tr>
+      <tr><td>8</td><td>UWB（VA05）优化固件提供测试</td><td style="color:#2980b9;font-weight:700">P2 中优先</td><td>Sensource, FacilitySight</td><td>研发</td></tr>
+      <tr><td>9</td><td>Amazon定价MAP管控确认</td><td style="color:#2980b9;font-weight:700">P2 中优先</td><td>Sensource</td><td>商务</td></tr>
+      <tr><td>10</td><td>巴西Smart Restroom标杆项目（Motiva/Allos/Iguatemi）跟进</td><td style="color:#2980b9;font-weight:700">P2 中优先</td><td>Motiva, Orbi.AI, Itech</td><td>商务/售前</td></tr>
+      <tr><td>11</td><td>Deskbee + VS321 iFood项目（600-700台）推进</td><td style="color:#2980b9;font-weight:700">P2 中优先</td><td>Deskbee</td><td>商务</td></tr>
+      <tr><td>12</td><td>北美海外工厂/NDAA合规方案推进</td><td style="color:#7f8c8d;font-weight:700">P3 长期</td><td>Sensource, FeedbackSolution</td><td>战略/供应链</td></tr>
+      <tr><td>13</td><td>A1联合参展/联合演讲2027年计划</td><td style="color:#7f8c8d;font-weight:700">P3 长期</td><td>A1</td><td>商务/市场</td></tr>
+    </table>
+  </div>
+
+  <div class="footer">Milesight VS产品线 · 出差总结报告 2026 Q2 · 仅供内部使用</div>
+</div>
+</body>
+</html>
